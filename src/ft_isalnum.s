@@ -11,22 +11,21 @@ _ft_isalnum:
 	cmp rax, 0
 		je isalpha
 
-	jmp True
-
+	mov rax, 1
+	leave
+	ret
 
 isalpha:
 	call _ft_isalpha
 	cmp rax, 0
 		je False
 
-	jmp True
-
-
-True:
 	mov rax, 1
 	leave
 	ret
 
+
 False:
+	mov rax, 0
 	leave
 	ret

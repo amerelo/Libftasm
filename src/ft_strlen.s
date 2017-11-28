@@ -9,7 +9,7 @@ _ft_strlen:
 
 	mov rcx, -1
 	mov rax, 0
-	repnz scasb
+	repnz scasb ;
 	mov rax, rcx
 	not rax ; Flip the bits
 	dec rax

@@ -5,9 +5,9 @@ section		.text
 _ft_isprint:
 	enter 0, 0
 
-	cmp rdi, '~'
-		jl False
 	cmp rdi, ' '
+		jl False
+	cmp rdi, '~'
 		jg False
 
 	mov rax, 1

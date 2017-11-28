@@ -1,16 +1,15 @@
 section		.text
 	global	_ft_strdup
-	extern _malloc
 	extern _ft_strlen
 	extern _ft_memcpy
+	extern _ft_strcpy
+	extern _malloc
 
 ;rdi, rsi, rdx
 _ft_strdup:
 	enter 0, 0
 
 	call _ft_strlen
-	cmp rax, 0
-		je Error
 
 	mov r12, rdi
 	mov rdi, rax
@@ -18,10 +17,9 @@ _ft_strdup:
 	cmp rax, 0
 		je Error
 
-	mov rdx, rdi
 	mov rsi, r12
 	mov rdi, rax
-	call _ft_memcpy
+	call _ft_strcpy
 
 	leave
 	ret

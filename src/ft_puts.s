@@ -9,8 +9,8 @@ _ft_puts:
 
 	push rdi
 	call _ft_strlen
-	cmp rax, 0
-		je Error
+	; cmp rax, 0
+	; 	je Error
 	pop rdi
 
 	mov rdx, rax
