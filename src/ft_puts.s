@@ -9,8 +9,7 @@ _ft_puts:
 
 	push rdi
 	call _ft_strlen
-	; cmp rax, 0
-	; 	je Error
+
 	pop rdi
 
 	mov rdx, rax
@@ -19,7 +18,7 @@ _ft_puts:
 	call _write
 
 	mov rdx, 1
-	mov rsi, msg
+	lea rsi, [rel msg]
 	mov rdi, 1
 	call _write
 

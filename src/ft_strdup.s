@@ -7,24 +7,21 @@ section		.text
 
 ;rdi, rsi, rdx
 _ft_strdup:
-	enter 0, 0
-
+	push rdi
 	call _ft_strlen
 
-	mov r12, rdi
+	inc rax
 	mov rdi, rax
+
 	call _malloc
 	cmp rax, 0
 		je Error
 
-	mov rsi, r12
+	pop rsi
 	mov rdi, rax
 	call _ft_strcpy
-
-	leave
 	ret
 
 Error:
 	mov rax, 0
-	leave
 	ret

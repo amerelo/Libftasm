@@ -24,6 +24,7 @@ char	*ft_strdup(const char *s1);
 
 void	ft_cat(int fd);
 
+char	*ft_strnew(size_t size);
 char	*ft_strcpy(char * dst, const char * src);
 
 #endif
