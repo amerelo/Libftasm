@@ -100,6 +100,30 @@ static int		test_memcpy(void)
 	return (reussi);
 }
 
+static int		test_strcpy(void)
+{
+	int		erreur = 0;
+	int		reussi = 0;
+	char	*s1 = malloc(sizeof(char) * 10);
+	char	*s2 = malloc(sizeof(char) * 15);
+	char	st1[9] = "ijd\0kjdno";
+	char	st2[14] = "";
+
+	ft_strcpy(s1, st1);
+	erreur = memcmp(s1, st1, 9);
+	if (!erreur)
+		reussi++;
+	else
+		txt_error_info("ft_strcpy(s1, \"ijd\\0kjdno\", 9)");
+	ft_strcpy(s2, st2);
+	erreur = memcmp(s2, st2, 0);
+	if (!erreur)
+		reussi++;
+	else
+		txt_error_info("ft_strcpy(s2, \"\", 0);");
+	return (reussi);
+}
+
 static int		test_strdup(void)
 {
 	int		reussi = 0;
@@ -293,6 +317,46 @@ static void		txt_error(char *s)
   printf("%s%s%s\n", C_ERROR, s, C_NO);
 }
 
+int test_ft_strnew()
+{
+	char *str;
+	char *dup;
+	int success;
+	int i;
+
+	i = 1;
+	success = 0;
+
+	while (i < 20000)
+	{
+		str = ft_strnew(i);
+		ft_memset(str, 'h', i-1);
+
+		dup = ft_strdup(str);
+
+		if (memcmp(dup, str, i) == 0)
+			success++;
+		free(str);
+		free(dup);
+		i = i + 2;
+	}
+	return success;
+}
+
+int test_ft_strcmp()
+{
+	int success;
+
+	char tab1[] = "holas\0";
+	char tab2[] = "hola\0";
+
+	// printf("sys result %d\n", strcmp(tab1, tab2));
+	printf("my result %d\n", ft_strcmp(tab1, tab2));
+
+	success++;
+	return success;
+}
+
 int test_ft_strdup2()
 {
 	char *str;
@@ -313,9 +377,6 @@ int test_ft_strdup2()
 
 		if (memcmp(dup, str, i) == 0)
 			success++;
-		// else {
-		// 	printf("dup i %d \n", i);
-		// }
 		free(str);
 		free(dup);
 		i = i + 2;
@@ -338,11 +399,18 @@ static void		Start(void)
 		txt_good("ft_bzero....", nbr, 2);
 	else
 		txt_error("ft_bzero....Total Error !");
-		/*******memcpy*******/
+	/*******memcpy*******/
 	if ((nbr = test_memcpy()))
 		txt_good("ft_memcpy...", nbr, 2);
 	else
 		txt_error("ft_memcpy...Total Error !");
+
+	/*******strcpy*******/
+	if ((nbr = test_memcpy()))
+		txt_good("ft_strcpy...", nbr, 2);
+	else
+		txt_error("ft_strcpy...Total Error !");
+
 	/*******strlen*******/
 	if ((nbr = test_strlen()))
 		txt_good("ft_strlen...", nbr, 4);
@@ -399,6 +467,16 @@ static void		Start(void)
 	else
 	  txt_error("ft_strdup...Total Error !");
 
+	if ((nbr = test_ft_strnew()))
+		txt_good("ft_strnew...", nbr, 10000);
+	else
+		txt_error("ft_strnew...Total Error !");
+
+	if ((nbr = test_ft_strcmp()))
+		txt_good("ft_strnew...", nbr, 2);
+	else
+		txt_error("ft_strnew...Total Error !");
+
 	//	test_ft_strnew();
 }
 
@@ -414,7 +492,6 @@ void test_ft_strdup(char *arg)
 {
 		ft_puts(ft_strdup(arg));
 }
-
 
 int		main(int argc, char **argv)
 {

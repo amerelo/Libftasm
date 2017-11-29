@@ -1,7 +1,6 @@
 section		.text
 	global	_ft_strnew
 	extern _malloc
-	extern _ft_bzero
 
 ;rdi, rsi, rdx
 _ft_strnew:
@@ -12,10 +11,18 @@ _ft_strnew:
 	cmp rax, 0
 		je Error
 
-	mov     rsi,  rdi
-	mov     rdi,  rax
-	call    _ft_bzero
+	inc		rdi
+	mov 	r12, 0
+	mov		rcx, 0
+	jmp 	Zero
 
+For:
+	mov [rax + rcx], r12
+	inc rcx
+
+Zero:
+	cmp rcx, rdi
+		je For
 	leave
 	ret
 

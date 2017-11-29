@@ -26,5 +26,7 @@ void	ft_cat(int fd);
 
 char	*ft_strnew(size_t size);
 char	*ft_strcpy(char * dst, const char * src);
+int		ft_isupper(int c);
+int		ft_islower(int c);
 
 #endif
